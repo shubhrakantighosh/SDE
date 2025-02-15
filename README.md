@@ -24,6 +24,34 @@ AWS Simple Queue Service (SQS) is a fully managed message queuing service that e
 3. Configure permissions using IAM roles and policies.
 4. Implement a worker service to process messages.
 
+### **Visibility Timeout in AWS SQS**  
+
+**Visibility Timeout** is a crucial feature in AWS SQS that ensures a message is not processed by multiple consumers at the same time. It acts as a temporary lock on a message once it is retrieved from the queue, preventing other consumers from seeing it until the timeout period expires.
+
+---
+
+### **How It Works**
+1. A consumer retrieves a message from the SQS queue.
+2. The message remains in the queue but becomes "invisible" to other consumers for a duration known as the **visibility timeout**.
+3. If the consumer **processes** the message successfully, it must **delete** the message from the queue.
+4. If the consumer fails to process the message within the visibility timeout, the message becomes visible again, allowing another consumer to pick it up.
+
+---
+
+### **Key Points**
+- Default visibility timeout: **30 seconds**
+- Maximum visibility timeout: **12 hours**
+- If a message is not deleted before the visibility timeout expires, it will be available for reprocessing.
+- If a consumer needs more time to process a message, it can extend the visibility timeout using the `ChangeMessageVisibility` API.
+
+---
+
+### **Example Scenario**
+- A worker retrieves a message at **12:00 PM**.
+- The queue’s **visibility timeout is 45 seconds**.
+- If the worker successfully processes and deletes the message before **12:00:45 PM**, the message is gone.
+- If the worker **fails** or crashes, the message becomes available again after **12:00:45 PM** for another worker to pick it up.
+
 
 ### **SQS Worker Concurrency and Per-Worker Concurrency**  
 
