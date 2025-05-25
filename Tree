@@ -1,0 +1,24 @@
+Level-order (Breadth-First)
+This method prints the tree level by level, starting from the root. A queue data structure is typically used.
+Enqueue the root node.
+While the queue is not empty:
+Dequeue a node and print its value.
+Enqueue its left child (if it exists).
+Enqueue its right child (if it exists).
+Depth-first (Pre-order, In-order, Post-order)
+These methods traverse the tree down to the leaf nodes before exploring siblings.
+Pre-order:
+(Root, Left, Right)
+Print the value of the current node.
+Recursively traverse the left subtree.
+Recursively traverse the right subtree.
+In-order:
+(Left, Root, Right) - Often used for Binary Search Trees to print values in sorted order.
+Recursively traverse the left subtree.
+Print the value of the current node.
+Recursively traverse the right subtree.
+Post-order:
+(Left, Right, Root)
+Recursively traverse the left subtree.
+Recursively traverse the right subtree.
+Print the value of the current node
